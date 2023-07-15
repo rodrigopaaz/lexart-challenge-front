@@ -1,0 +1,13 @@
+.message-container-left{
+display: flex;
+width: 90%;
+align-items: center;
+justify-content: flex-start;
+}
+
+.message-container-right{
+display: flex;
+width: 90%;
+align-items: center;
+justify-content: flex-end;   
+}
