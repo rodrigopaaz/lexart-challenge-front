@@ -4,13 +4,14 @@ display: flex;
 width: 80%;
 align-items: center;
 justify-content: flex-start;
-margin-bottom: 30px;
+margin-bottom: 4px;
 }
 
 .message-container-left div{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    text-align: left;
     justify-content: flex-start;   
     margin-bottom: 5px;
     padding: 5px;
@@ -30,6 +31,7 @@ padding: 5px;
 border-top-left-radius: 10px;
 border-bottom-left-radius: 10px;
 border-top-right-radius: 10px;
+text-align: right;
 background-color: rgb(214, 213, 213);
 }
 
@@ -39,5 +41,29 @@ width: 80%;
 flex-wrap: wrap;
 align-items: center;
 justify-content: flex-end;   
-margin-bottom: 30px;
+margin-bottom: 5px;
 }
+
+.message-container-vertical ul{
+   display: flex;
+   flex-direction: column;
+   margin-left: 15px;
+   padding: 1px;
+}
+
+.message-container-vertical li{
+  list-style: lower-latin;
+}
+
+.message-container-vertical li:hover, a:hover{
+    color: rgb(100, 100, 100);
+  }
+
+  .message-container-vertical a:hover{
+    color: rgb(100, 100, 100);
+  }
+  
+.message-container-vertical a {
+  color: black;
+}
+  

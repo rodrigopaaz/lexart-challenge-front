@@ -9,11 +9,12 @@
 
 .chat-message-container{
     display: flex;
+    overflow: hidden;
     align-items: center;
     justify-content: flex-end;
     flex-direction: column;
-    height: 70%;
-    width: 100%;
+    height: 380px;
+    width: 95%;
 }
 
 .chat-message-bot-avatar{
