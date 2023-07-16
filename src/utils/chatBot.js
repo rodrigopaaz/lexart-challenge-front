@@ -1,3 +1,5 @@
+const { default: csvCreator } = require('./csvCreator')
+
 const intro = (message) => {
   const terms = ['hello', 'goodbye', 'good', 'i want']
   for (let i = 0; i < terms.length; i++) {
@@ -49,10 +51,6 @@ const offersALoan = (message) => {
   return 'Sorry i didnt understood what you want'
 }
 
-const endConversation = (message) => {
-  return 'Thank you for your attention'
-}
-
 const chatBot = (allMessages) => {
   const lastMessages = allMessages[allMessages.length - 1]
   if (lastMessages.length === 1) return intro(lastMessages.text)
@@ -67,7 +65,7 @@ const chatBot = (allMessages) => {
   }
   if (allMessages.length >= 2 && lastMessages.text.includes('goodbye')) {
     localStorage.setItem('history', JSON.stringify(allMessages))
-    return endConversation(lastMessages.text)
+    return csvCreator(allMessages)
   }
   if (lastMessages) {
     return offersALoan(lastMessages.text)
