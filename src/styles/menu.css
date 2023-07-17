@@ -1,0 +1,6 @@
+.menu-container{
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    background-color: rgb(87, 82, 92);
+}

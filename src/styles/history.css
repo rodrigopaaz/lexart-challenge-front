@@ -1,0 +1,6 @@
+.history-container{
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    background-color: rgb(142, 142, 146);
+}
