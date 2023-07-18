@@ -1,4 +1,4 @@
-# Let-Art Chatbot Project
+# Lexart Chatbot Project
 
 ![Chatbot Robot](https://static.vecteezy.com/system/resources/previews/022/254/572/large_2x/robot-working-on-laptop-computer-artificial-intelligence-concept-3d-rendering-generative-ai-free-photo.jpg)
 
