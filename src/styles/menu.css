@@ -1,6 +1,25 @@
 .menu-container{
     display: flex;
     flex-direction: column;
-    width: 15%;
-    background-color: rgb(87, 82, 92);
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100vh;
+    width: 25%;
+    background-color: rgb(142, 142, 146);
+}
+
+.menu-head{
+    font-size: 30px;
+    font-weight: 900;
+}
+
+.menu-options{
+    height: 60vh;
+    font-size: 20px;
+    font-weight: 900;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    cursor: pointer;
 }

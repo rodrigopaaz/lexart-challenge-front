@@ -1,75 +1,115 @@
+const { login, register } = require('../services/request')
 const { default: csvCreator } = require('./csvCreator')
+
+const stages = {
+  isRegistered: true,
+  intro: false,
+  name: false,
+  email: false,
+  password: false,
+  loanOffer: false,
+  endConversation: false
+}
 
 const intro = (message) => {
   const terms = ['hello', 'goodbye', 'good', 'i want']
-  for (let i = 0; i < terms.length; i++) {
-    const term = terms[i]
+  for (const term of terms) {
     if (message.toLowerCase().includes(term)) {
       switch (term) {
       case 'hello':
-        return 'Hello!, how can i help you, type your user and password to start a conversation.'
+        stages.intro = true
+        return 'Hello! How can I assist you? If you are already registered, please type your email followed by your password to start a conversation. If you are not registered, type "create user".'
       case 'goodbye':
-        return "You've just arrived, type your user and password to start a converstion. Or type 'good bye' to end this conversation."
+        stages.intro = true
+        return 'Welcome! If you are already registered, please type your email followed by your password to start a conversation. If you are not registered, type "create user". Alternatively, you can type "goodbye" to end this conversation.'
       case 'good':
-        return 'Type your user and password to start a converstion, then tell me what would be good for you.'
-
+        stages.intro = true
+        return 'Welcome! If you are already registered, please type your email followed by your password to start a conversation. If you are not registered, type "create user". Let me know what would be good for you.'
       default:
-        return 'Type your user and password to start a converstion, then tell me what you want.'
+        stages.intro = true
+        return 'Welcome! If you are already registered, please type your email followed by your password to start a conversation. If you are not registered, type "create user". Let me know what you want.'
       }
     }
   }
-  return 'Sorry, i didnt understood what you said, tell me what you want or what would be good for you.'
+  return 'Sorry, I didn\'t understand. Please let me know what you want or what would be good for you.'
+}
+
+const validateName = async (name) => {
+  const nameRegex = /^.{2,}$/
+  const isValid = nameRegex.test(name)
+  if (!isValid) return 'Please enter a valid name with at least 2 characters!'
+  stages.name = name
+  return 'Now, please enter your email'
 }
 
 const validateEmail = (email) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  const validate = emailRegex.test(email)
-  console.log(validate)
-  console.log(email)
-  if (!validate) return 'Please type a valid e-mail!'
-  localStorage.setItem('user', JSON.stringify({ email }))
-  return 'Now type your password'
+  const isValid = emailRegex.test(email)
+  if (!isValid) return 'Please enter a valid email address!'
+  stages.email = email
+  return 'Now, please enter your password.'
 }
 
-const validatePassword = (password) => {
+const validatePassword = async (password) => {
   const passwordRegex = /^.{6,}$/
-  const validate = passwordRegex.test(password)
-  if (!validate) return 'Please type password bigger or equal than 6 characteres!'
-  const user = JSON.parse(localStorage.getItem('user'))
-  localStorage.setItem('user', JSON.stringify({ ...user, password }))
-  return 'how can help you?'
+  const isValid = passwordRegex.test(password)
+  if (!isValid) return 'Please enter a password with at least 6 characters!'
+  stages.password = password
+  try {
+    if (stages.isRegistered) {
+      const user = await login(stages.email, stages.password)
+      stages.name = user.name
+      localStorage.setItem('user', JSON.stringify(user))
+    } else {
+      const user = await register(stages.name, stages.email, stages.password)
+      localStorage.setItem('user', JSON.stringify(user))
+    }
+    return `Glad to see you here ${stages.name}, How can I assist you?`
+  } catch (error) {
+    return 'An error happened during your login, are you registered? if you are not registered type "create user"'
+  }
 }
 
 const offersALoan = (message) => {
   if (message.includes('loan')) {
+    stages.loanOffer = true
     return [
-      { message: 'Do you want to apply for a loan?', url: 'https://www.globo.com' },
-      { message: 'Loan conditions', url: 'https://www.g1.com' },
-      { message: 'Help', url: 'https://www.instagram.com' }
+      { message: 'a - Do you want to apply for a loan?', url: '#' },
+      { message: 'b - Loan conditions', url: '#' },
+      { message: 'c - Help', url: '#' },
+      { message: 'Click a message above for personal assistance' }
     ]
   }
-  return 'Sorry i didnt understood what you want'
+  return 'Sorry, I didn\'t understand what you want.'
 }
 
-const chatBot = (allMessages) => {
-  const lastMessages = allMessages[allMessages.length - 1]
-  if (lastMessages.length === 1) return intro(lastMessages.text)
-  const user = JSON.parse(localStorage.getItem('user'))
-  if (!user || !user.email) {
-    return validateEmail(lastMessages.text,
-      lastMessages.password)
-  }
-  if (!user || !user.password) {
-    return validatePassword(lastMessages.text,
-      lastMessages.password)
-  }
-  if (allMessages.length >= 2 && lastMessages.text.includes('goodbye')) {
-    localStorage.setItem('history', JSON.stringify(allMessages))
-    return csvCreator(allMessages)
-  }
-  if (lastMessages) {
-    return offersALoan(lastMessages.text)
+const chatBot = async (allMessages) => {
+  const lastMessage = allMessages[allMessages.length - 1]
+  switch (true) {
+  case typeof lastMessage.text === 'string' && lastMessage.text.toLowerCase().includes('create user'):
+    stages.isRegistered = false
+    stages.email = false
+    stages.password = false
+    return 'Please enter your name.'
+  case !stages.intro:
+    return intro(lastMessage.text)
+  case !stages.isRegistered && !stages.name:
+    return validateName(lastMessage.text)
+  case (!stages.isRegistered && !stages.email) || !stages.email:
+    return validateEmail(lastMessage.text)
+  case (!stages.isRegistered && !stages.password) || !stages.password:
+    return await validatePassword(lastMessage.text)
+  case !stages.loanOffer:
+    return offersALoan(lastMessage.text)
+  case !stages.endConversation:
+    if (lastMessage.text.toLowerCase().includes('goodbye')) {
+      stages.endConversation = true
+      return await csvCreator(allMessages, 1)
+    }
+    return "Sorry, I didn't understand. Please let me know what you want or what would be good for you."
+  default:
+    return await csvCreator(allMessages)
   }
 }
 
-module.exports = { chatBot, intro, offersALoan }
+module.exports = { chatBot }

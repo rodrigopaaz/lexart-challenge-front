@@ -14,11 +14,12 @@ margin-bottom: 4px;
     text-align: left;
     justify-content: flex-start;   
     margin-bottom: 5px;
-    padding: 5px;
+    padding: 7px;
+    box-shadow: 1px 1px 5px rgb(114, 114, 114);
     border-top-left-radius: 10px;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
-    background-color: rgb(168, 168, 168);
+    background-color: rgb(187, 187, 187);
     }
 
 .message-container-right div{
@@ -27,7 +28,8 @@ flex-wrap: wrap;
 align-items: center;
 justify-content: flex-end;   
 margin-bottom: 5px;
-padding: 5px;
+padding: 7px;
+box-shadow: 1px 1px 5px rgb(114, 114, 114);
 border-top-left-radius: 10px;
 border-bottom-left-radius: 10px;
 border-top-right-radius: 10px;
@@ -44,26 +46,12 @@ justify-content: flex-end;
 margin-bottom: 5px;
 }
 
-.message-container-vertical ul{
-   display: flex;
-   flex-direction: column;
-   margin-left: 15px;
-   padding: 1px;
+.message-container-custom a{
+  text-decoration: underline;
 }
 
-.message-container-vertical li{
-  list-style: lower-latin;
-}
-
-.message-container-vertical li:hover, a:hover{
+.message-container-custom a:hover{
+    cursor: pointer;
     color: rgb(100, 100, 100);
   }
-
-  .message-container-vertical a:hover{
-    color: rgb(100, 100, 100);
-  }
-  
-.message-container-vertical a {
-  color: black;
-}
   
