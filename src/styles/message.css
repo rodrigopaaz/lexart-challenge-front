@@ -46,26 +46,12 @@ justify-content: flex-end;
 margin-bottom: 5px;
 }
 
-.message-container-vertical ul{
-   display: flex;
-   flex-direction: column;
-   margin-left: 15px;
-   padding: 1px;
+.message-container-custom a{
+  text-decoration: underline;
 }
 
-.message-container-vertical li{
-  list-style: lower-latin;
-}
-
-.message-container-vertical li:hover, a:hover{
+.message-container-custom a:hover{
+    cursor: pointer;
     color: rgb(100, 100, 100);
   }
-
-  .message-container-vertical a:hover{
-    color: rgb(100, 100, 100);
-  }
-  
-.message-container-vertical a {
-  color: black;
-}
   

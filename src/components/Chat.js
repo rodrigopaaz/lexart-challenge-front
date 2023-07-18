@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import '../styles/chat.css'
 import { chatBot } from '../utils/chatBot'
 import Message from './Message'
 import { BiSend } from 'react-icons/bi'
+import AppContext from '../context/Context'
 
 export default function Chat () {
   const [text, setText] = useState('')
-  const [messages, setMessages] = useState([])
+  const { messages, setMessages } = useContext(AppContext)
 
   const handleMessage = async () => {
     const newMessage = {
@@ -46,7 +47,7 @@ export default function Chat () {
       <div className='chat-message-bot-avatar'>.</div>
       <div className='chat-message-container'>
         {messages.map((m) => (
-          <Message key={m.id} message={ m }/>
+          <Message key={m.id + m.text} message={ m }/>
         ))}
 
       </div>

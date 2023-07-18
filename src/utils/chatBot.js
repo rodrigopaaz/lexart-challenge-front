@@ -1,3 +1,4 @@
+const { login, register } = require('../services/request')
 const { default: csvCreator } = require('./csvCreator')
 
 const stages = {
@@ -33,6 +34,14 @@ const intro = (message) => {
   return 'Sorry, I didn\'t understand. Please let me know what you want or what would be good for you.'
 }
 
+const validateName = async (name) => {
+  const nameRegex = /^.{2,}$/
+  const isValid = nameRegex.test(name)
+  if (!isValid) return 'Please enter a valid name with at least 2 characters!'
+  stages.name = name
+  return 'Now, please enter your email'
+}
+
 const validateEmail = (email) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   const isValid = emailRegex.test(email)
@@ -41,21 +50,34 @@ const validateEmail = (email) => {
   return 'Now, please enter your password.'
 }
 
-const validatePassword = (password) => {
+const validatePassword = async (password) => {
   const passwordRegex = /^.{6,}$/
   const isValid = passwordRegex.test(password)
   if (!isValid) return 'Please enter a password with at least 6 characters!'
   stages.password = password
-  return 'How can I assist you?'
+  try {
+    if (stages.isRegistered) {
+      const user = await login(stages.email, stages.password)
+      stages.name = user.name
+      localStorage.setItem('user', JSON.stringify(user))
+    } else {
+      const user = await register(stages.name, stages.email, stages.password)
+      localStorage.setItem('user', JSON.stringify(user))
+    }
+    return `Glad to see you here ${stages.name}, How can I assist you?`
+  } catch (error) {
+    return 'An error happened during your login, are you registered? if you are not registered type "create user"'
+  }
 }
 
 const offersALoan = (message) => {
   if (message.includes('loan')) {
     stages.loanOffer = true
     return [
-      { message: 'Do you want to apply for a loan?', url: 'https://www.globo.com' },
-      { message: 'Loan conditions', url: 'https://www.g1.com' },
-      { message: 'Help', url: 'https://www.instagram.com' }
+      { message: 'a - Do you want to apply for a loan?', url: '#' },
+      { message: 'b - Loan conditions', url: '#' },
+      { message: 'c - Help', url: '#' },
+      { message: 'Click a message above for personal assistance' }
     ]
   }
   return 'Sorry, I didn\'t understand what you want.'
@@ -66,18 +88,17 @@ const chatBot = async (allMessages) => {
   switch (true) {
   case typeof lastMessage.text === 'string' && lastMessage.text.toLowerCase().includes('create user'):
     stages.isRegistered = false
+    stages.email = false
+    stages.password = false
     return 'Please enter your name.'
-  case !stages.isRegistered && !stages.email:
-    stages.name = lastMessage.text
-    return validateEmail(lastMessage.text)
-  case !stages.isRegistered && !stages.password:
-    return validatePassword(lastMessage.text)
   case !stages.intro:
     return intro(lastMessage.text)
-  case !stages.email:
+  case !stages.isRegistered && !stages.name:
+    return validateName(lastMessage.text)
+  case (!stages.isRegistered && !stages.email) || !stages.email:
     return validateEmail(lastMessage.text)
-  case !stages.password:
-    return validatePassword(lastMessage.text)
+  case (!stages.isRegistered && !stages.password) || !stages.password:
+    return await validatePassword(lastMessage.text)
   case !stages.loanOffer:
     return offersALoan(lastMessage.text)
   case !stages.endConversation:
@@ -87,8 +108,8 @@ const chatBot = async (allMessages) => {
     }
     return "Sorry, I didn't understand. Please let me know what you want or what would be good for you."
   default:
-    return await csvCreator(allMessages, 1)
+    return await csvCreator(allMessages)
   }
 }
 
-module.exports = { chatBot, intro, offersALoan }
+module.exports = { chatBot }

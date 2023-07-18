@@ -4,14 +4,19 @@ import AppContext from './Context'
 // eslint-disable-next-line react/prop-types
 export default function AppProvider ({ children }) {
   const [user, setUser] = useState('')
+  const [messages, setMessages] = useState([])
 
   const data = useMemo(
     () => ({
       user,
-      setUser
+      setUser,
+      messages,
+      setMessages
     }), [
       user,
-      setUser
+      setUser,
+      messages,
+      setMessages
     ]
   )
   return (

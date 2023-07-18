@@ -1,6 +1,10 @@
 import axios from 'axios'
+import { getFiles } from '../services/request'
 
-const csvCreator = async (jsonData, userId) => {
+const csvCreator = async (jsonData) => {
+  const { id: userId, name } = JSON.parse(localStorage.getItem('user'))
+  const { data } = await getFiles(userId)
+  console.log(data)
   const csvData = [
     ['ID', 'User', 'Text'],
     ...jsonData.map(({ id, user, text }) => [id, user, text])
@@ -9,9 +13,14 @@ const csvCreator = async (jsonData, userId) => {
   const csvContent = csvData.map(row => row.join(',')).join('\n')
   const csvBlob = new Blob([csvContent], { type: 'text/csv' })
 
+  const fileName = `Conversation - ${name}#${data.messageIds.length + 1} - 
+  ${new Date().toLocaleDateString()} 
+  ${new Date().toLocaleTimeString().substring(0, 5)}`
+
   const formData = new FormData()
   formData.append('userId', userId)
   formData.append('file', csvBlob, 'output.csv')
+  formData.append('fileName', fileName)
 
   try {
     const response = await axios.post('http://localhost:3001/message', formData, {
@@ -21,7 +30,10 @@ const csvCreator = async (jsonData, userId) => {
     })
 
     if (response.status === 200) {
-      return 'File uploaded successfully'
+      return `Thank you for reaching out to us! We appreciate your 
+      interaction and value your conversation. 
+      Your inquiry and our responses have been recorded and saved in our 
+      conversation history for future reference.`
     } else {
       throw new Error('Failed to upload file')
     }

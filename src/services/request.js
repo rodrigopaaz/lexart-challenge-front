@@ -11,27 +11,27 @@ const login = async (email, password, setHost) => {
   const host = setHost || 'http://localhost:3001'
   const { data } = await axios({
     method: 'post',
-    url: `${host}/user`,
+    url: `${host}/login`,
     data: {
       email,
       password
     }
   })
-  localStorage.setItem('user', JSON.stringify(data))
+  return data
 }
 
-const register = async (username, email, password, setHost) => {
+const register = async (name, email, password, setHost) => {
   const host = setHost || 'http://localhost:3001'
   const { data } = await axios({
     method: 'post',
-    url: `${host}/register`,
+    url: `${host}/user`,
     data: {
-      username,
+      name,
       password,
       email
     }
   })
-  localStorage.setItem('user', JSON.stringify(data))
+  return data
 }
 
 const remove = async (id, setHost) => {
