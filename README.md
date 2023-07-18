@@ -38,28 +38,6 @@ To run the chatbot locally on your machine, follow these steps:
 - CSS
 - Axios
 
-  <hr>
-
-## 📦 Environment variables
-
-To run this project, you will need to add the following environment variables to your .env
-
-`URL_BASE`= Base URL for Buscapé web scraping
-
-`URL_BASESEARCH`= Base URL for searching in Buscapé web scraping database
-
-`URL_ML`= Base URL for Mercado Livre search
-
-`PASS_DB`= Database password
-
-`USER_DB`= Database username
-
-`HASH_ATT`= Update hash
-
-🌟 Ready to use!
-
-<hr>
-
 ## Contributors
 
 - [Rodrigo paz](https://github.com/rodrigopaaz)
