@@ -3,6 +3,8 @@ import '../styles/history.css'
 
 export default function History () {
   return (
-    <div className='history-container'>History</div>
+    <div className='history-container'>
+    history
+    </div>
   )
 }

@@ -1,23 +1,19 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import '../styles/message.css'
 
-export default function Message (data) {
-  const { message } = data
+export default function Message ({ message }) {
   const classAlign = message.user === 'bot' ? 'left' : 'right'
-  const isMessageArray = Array.isArray(message.text)
+  console.log(message)
 
   return (
     <div className={`message-container-${classAlign}`}>
-      <div className={isMessageArray ? 'message-container-vertical' : null}>
-        {isMessageArray
+      <div className={message?.link ? 'message-container-vertical' : null}>
+        {message?.link
           ? (
-            <ul>
-              {message.text.map(({ message, url }, index) => (
-                <li key={index}>
-                  <a href={url} target='_blank' rel="noreferrer">{message}</a>
-                </li>
-              ))}
-            </ul>
+            <a href={message.link} target='_blank' rel='noreferrer'>
+              {message.text}
+            </a>
           )
           : (
             message.text
@@ -25,4 +21,12 @@ export default function Message (data) {
       </div>
     </div>
   )
+}
+
+Message.propTypes = {
+  message: PropTypes.shape({
+    user: PropTypes.string.isRequired,
+    link: PropTypes.string,
+    text: PropTypes.string.isRequired
+  }).isRequired
 }

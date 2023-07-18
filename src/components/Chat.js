@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import '../styles/chat.css'
 import { chatBot } from '../utils/chatBot'
 import Message from './Message'
+import { BiSend } from 'react-icons/bi'
 
 export default function Chat () {
   const [text, setText] = useState('')
   const [messages, setMessages] = useState([])
 
-  const handleMessage = () => {
+  const handleMessage = async () => {
     const newMessage = {
       id: messages.length + 1,
       user: 'rodrigo',
@@ -19,12 +20,24 @@ export default function Chat () {
     setText('')
 
     if (updatedMessages.length >= 1) {
-      const botResponse = {
-        id: updatedMessages.length + 1,
-        user: 'bot',
-        text: chatBot(updatedMessages)
+      const message = await chatBot(updatedMessages)
+
+      if (Array.isArray(message)) {
+        const botResponses = message.map((response, index) => ({
+          id: updatedMessages.length + index + 1,
+          user: 'bot',
+          link: response.url,
+          text: response.message
+        }))
+        setMessages([...updatedMessages, ...botResponses])
+      } else {
+        const botResponse = {
+          id: updatedMessages.length + 1,
+          user: 'bot',
+          text: message
+        }
+        setMessages([...updatedMessages, botResponse])
       }
-      setMessages([...updatedMessages, botResponse])
     }
   }
 
@@ -45,8 +58,9 @@ export default function Chat () {
           }}
         />
         <button
+          className='chat-send-button'
           onClick={() => handleMessage()}
-        >send</button>
+        ><BiSend /></button>
       </div>
     </div>
   )
