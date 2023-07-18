@@ -1,6 +1,6 @@
 # Chatbot Project
 
-![Chatbot Robot](https://e7.pngegg.com/pngimages/292/543/png-clipart-robot-humanoid-robot-military-robot-artificial-intelligence-robotics-electronics-desktop-wallpaper-thumbnail.png)
+![Chatbot Robot](https://static.vecteezy.com/system/resources/previews/022/254/572/large_2x/robot-working-on-laptop-computer-artificial-intelligence-concept-3d-rendering-generative-ai-free-photo.jpg)
 
 This project implements a chatbot with interactive features and user registration functionality. The chatbot is designed to respond to specific messages and provide personalized assistance to users.
 
