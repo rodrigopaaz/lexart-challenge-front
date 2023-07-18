@@ -1,5 +1,7 @@
 # Chatbot Project
 
+![Chatbot Robot](robot-image.png)
+
 This project implements a chatbot with interactive features and user registration functionality. The chatbot is designed to respond to specific messages and provide personalized assistance to users.
 
 ## Features
