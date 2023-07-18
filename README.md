@@ -1,36 +1,41 @@
-<div align="center" style="display: block"> 
-  
-<img height="140em" src="https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api?username=rodrigopaaz&show_icons=true&theme=dark&include_all_commits=true&count_private=true"/>
-  <img height="140em" src="https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api/top-langs/?username=rodrigopaaz&layout=compact&langs_count=16&theme=dark"/>
-</div>
+# Chatbot Project
 
-<br>
- <h1 align='center'>Minhas Stacks 🛠️</h1>
- </p>
-<div style="display: inline_block;" align="center">
-<table>
-  <tr>
-    <th>Project built with</th>
-  </tr>
-  <tr>
-    <td>
-      <img align="center" alt="Tz-Js" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-plain.svg">
-      <img align="center" alt="Tz-React" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg">
-      <img align="center" alt="Tz-HTML" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg">
-      <img align="center" alt="Tz-CSS" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg">
-             <img align="center" alt="Tz-Jest" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg">
-    </td>
-    <td>
-       <img align="center" alt="Tz-Ts" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-plain.svg">
-       <img align="center" alt="Tz-npm" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg">
-       <img align="center" alt="Tz-npm" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original-wordmark.svg">
-       <img align="center" alt="Tz-mysql" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg">
-      <img align="center" alt="Tz-express" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original-wordmark.svg">
-      <img align="center" alt="Tz-sequelize" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sequelize/sequelize-original-wordmark.svg">
-    </td>
-  </tr>
-</table>
-</table>
-</div>
-  
-</div>
+This project implements a chatbot with interactive features and user registration functionality. The chatbot is designed to respond to specific messages and provide personalized assistance to users.
+
+## Features
+
+- **User Registration**: Users can create an account by providing their name, email, and password.
+- **Login**: Registered users can log in using their email and password to access the chatbot.
+- **Interactive Chat**: The chatbot engages in conversation with users and responds to specific messages.
+- **Service Options**: After logging in, users are presented with three service options to choose from.
+- **Customized Responses**: Each service option triggers a customized response from the chatbot.
+- **Conversation History**: When the conversation ends with a "goodbye" message, the conversation is stored in a database.
+- **Download History**: Users can download their conversation history from the menu to review their interactions.
+
+## Getting Started
+
+To run the chatbot locally on your machine, follow these steps:
+
+1. Clone this repository.
+2. Install the required dependencies using `npm install`.
+3. Start the application using `npm start`.
+4. Access the chatbot in your web browser at `http://localhost:3000`.
+
+## Usage
+
+1. Create an account by providing your name, email, and password.
+2. Log in using your registered email and password.
+3. Engage in a conversation with the chatbot and explore the available service options.
+4. When you're ready to end the conversation, type "goodbye" to store the conversation in the database.
+5. To access your conversation history, navigate to the history menu and download the conversation file.
+
+## Technologies Used
+
+- React.js
+- HTML
+- CSS
+- Axios
+
+## Contributors
+
+- [Rodrigo paz](https://github.com/rodrigopaaz)
