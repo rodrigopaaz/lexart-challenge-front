@@ -1,3 +1,4 @@
+@media only screen and (max-width: 960px){
 .about-container{
     display: flex;
 }
@@ -11,11 +12,35 @@
 }
 
 .about-contant h4{
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .about-contant p{
-    font-size: 20px;
+    font-size: 15px;
     width: 70%;
     text-align: justify;
 }
+}
+@media only screen and (min-width: 961px){
+    .about-container{
+        display: flex;
+    }
+    
+    .about-contant{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 75%;
+    }
+    
+    .about-contant h4{
+        font-size: 30px;
+    }
+    
+    .about-contant p{
+        font-size: 20px;
+        width: 70%;
+        text-align: justify;
+    }
+    }

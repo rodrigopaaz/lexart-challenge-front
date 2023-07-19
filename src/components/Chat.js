@@ -4,6 +4,7 @@ import { chatBot } from '../utils/chatBot'
 import Message from './Message'
 import { BiSend } from 'react-icons/bi'
 import AppContext from '../context/Context'
+import chatBotImg from '../images/chatbot.png'
 
 export default function Chat () {
   const [text, setText] = useState('')
@@ -44,7 +45,9 @@ export default function Chat () {
 
   return (
     <div className='chat-container'>
-      <div className='chat-message-bot-avatar'>.</div>
+      <div className='chat-message-bot-avatar'>
+        <img src={chatBotImg} alt="bot logo" />
+      </div>
       <div className='chat-message-container'>
         {messages.map((m) => (
           <Message key={m.id + m.text} message={ m }/>
