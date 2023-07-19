@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const getFiles = async (userId, setHost) => {
+  console.log(setHost, 'get')
   const host = setHost || 'http://localhost:3001'
 
   const files = await axios.get(`${host}/user/${userId}`)
@@ -8,6 +9,7 @@ const getFiles = async (userId, setHost) => {
 }
 
 const login = async (email, password, setHost) => {
+  console.log(setHost, 'login')
   const host = setHost || 'http://localhost:3001'
   const { data } = await axios({
     method: 'post',
@@ -21,6 +23,7 @@ const login = async (email, password, setHost) => {
 }
 
 const register = async (name, email, password, setHost) => {
+  console.log(setHost, 'register')
   const host = setHost || 'http://localhost:3001'
   const { data } = await axios({
     method: 'post',

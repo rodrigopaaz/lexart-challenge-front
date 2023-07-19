@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { getFiles } from '../services/request'
 
-const csvCreator = async (jsonData) => {
+const csvCreator = async (jsonData, host) => {
   const { id: userId, name } = JSON.parse(localStorage.getItem('user'))
-  const { data } = await getFiles(userId)
+  const { data } = await getFiles(userId, host)
   console.log(data)
   const csvData = [
     ['ID', 'User', 'Text'],
@@ -21,9 +21,9 @@ const csvCreator = async (jsonData) => {
   formData.append('userId', userId)
   formData.append('file', csvBlob, 'output.csv')
   formData.append('fileName', fileName)
-
+  const server = `${host}/message` || 'http://localhost:3001/message'
   try {
-    const response = await axios.post('http://localhost:3001/message', formData, {
+    const response = await axios.post(server, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
