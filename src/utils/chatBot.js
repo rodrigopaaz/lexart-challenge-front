@@ -85,7 +85,7 @@ const offersALoan = (message) => {
   return 'Sorry, I didn\'t understand what you want.'
 }
 
-const chatBot = async (allMessages, server) => {
+export const chatBot = async (allMessages, server) => {
   host = server
   const lastMessage = allMessages[allMessages.length - 1]
   switch (true) {
@@ -114,5 +114,3 @@ const chatBot = async (allMessages, server) => {
     return await csvCreator(allMessages, host)
   }
 }
-
-module.exports = { chatBot }
