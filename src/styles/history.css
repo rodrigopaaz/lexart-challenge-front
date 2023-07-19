@@ -1,3 +1,4 @@
+@media only screen and (max-width: 960px){
 .history-container{
     display: flex;
     height: 100vh;
@@ -37,3 +38,128 @@
     color: black;
     cursor: pointer;
 }
+}
+@media only screen and (max-width: 960px){
+    .history-container{
+        display: flex;
+        height: 100vh;
+        width: 100%;
+        background-color: rgb(255, 255, 255);
+    }
+    
+    .history-contant{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 75%;
+    }
+    
+    .history-contant div:first-child{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        background-color: rgb(221, 221, 221);
+        border-radius: 5px;    
+    }
+    
+    .history-contant div .history-card{
+        background-color: rgb(209, 208, 208);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        width: 550px;
+        margin: 5px;
+    }
+    
+    .history-contant div .history-card a{
+        text-decoration: none;
+        color: black;
+        cursor: pointer;
+    }
+    }
+    @media only screen and (max-width: 961px){
+        .history-container{
+            display: flex;
+            height: 100vh;
+            width: 100%;
+            background-color: rgb(255, 255, 255);
+        }
+        
+        .history-contant{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 75%;
+        }
+        
+        .history-contant div:first-child{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            background-color: rgb(221, 221, 221);
+            border-radius: 5px;    
+        }
+        
+        .history-contant div .history-card{
+            background-color: rgb(209, 208, 208);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            width: 250px;
+            margin: 5px;
+        }
+        
+        .history-contant div .history-card a{
+            text-decoration: none;
+            color: black;
+            cursor: pointer;
+        }
+        }
+
+@media only screen and (min-width: 961px){
+    .history-container{
+        display: flex;
+        height: 100vh;
+        width: 100%;
+        background-color: rgb(255, 255, 255);
+    }
+    
+    .history-contant{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 75%;
+    }
+    
+    .history-contant div:first-child{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        background-color: rgb(221, 221, 221);
+        border-radius: 5px;    
+    }
+    
+    .history-contant div .history-card{
+        background-color: rgb(209, 208, 208);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        width: 550px;
+        margin: 5px;
+    }
+    
+    .history-contant div .history-card a{
+        text-decoration: none;
+        color: black;
+        cursor: pointer;
+    }
+    }
