@@ -5,10 +5,10 @@ import { getFiles } from '../services/request'
 
 export default function History () {
   const [cards, setCards] = useState([])
-
+  const host = process.env.REACT_APP_API_URL
   const getItems = async (userId) => {
     try {
-      const { data } = await getFiles(userId)
+      const { data } = await getFiles(userId, host)
       setCards(data.messageIds)
     } catch (error) {
       console.error(error)

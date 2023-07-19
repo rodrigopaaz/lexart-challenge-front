@@ -11,6 +11,8 @@ const stages = {
   endConversation: false
 }
 
+let host = ''
+
 const intro = (message) => {
   const terms = ['hello', 'goodbye', 'good', 'i want']
   for (const term of terms) {
@@ -57,11 +59,11 @@ const validatePassword = async (password) => {
   stages.password = password
   try {
     if (stages.isRegistered) {
-      const user = await login(stages.email, stages.password)
+      const user = await login(stages.email, stages.password, host)
       stages.name = user.name
       localStorage.setItem('user', JSON.stringify(user))
     } else {
-      const user = await register(stages.name, stages.email, stages.password)
+      const user = await register(stages.name, stages.email, stages.password, host)
       localStorage.setItem('user', JSON.stringify(user))
     }
     return `Glad to see you here ${stages.name}, How can I assist you?`
@@ -83,7 +85,8 @@ const offersALoan = (message) => {
   return 'Sorry, I didn\'t understand what you want.'
 }
 
-const chatBot = async (allMessages) => {
+const chatBot = async (allMessages, server) => {
+  host = server
   const lastMessage = allMessages[allMessages.length - 1]
   switch (true) {
   case typeof lastMessage.text === 'string' && lastMessage.text.toLowerCase().includes('create user'):
@@ -104,11 +107,11 @@ const chatBot = async (allMessages) => {
   case !stages.endConversation:
     if (lastMessage.text.toLowerCase().includes('goodbye')) {
       stages.endConversation = true
-      return await csvCreator(allMessages, 1)
+      return await csvCreator(allMessages, host)
     }
     return "Sorry, I didn't understand. Please let me know what you want or what would be good for you."
   default:
-    return await csvCreator(allMessages)
+    return await csvCreator(allMessages, host)
   }
 }
 

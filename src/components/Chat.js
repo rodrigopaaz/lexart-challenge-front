@@ -19,9 +19,9 @@ export default function Chat () {
     const updatedMessages = [...messages, newMessage]
     setMessages(updatedMessages)
     setText('')
-
+    const host = process.env.REACT_APP_API_URL
     if (updatedMessages.length >= 1) {
-      const message = await chatBot(updatedMessages)
+      const message = await chatBot(updatedMessages, host)
 
       if (Array.isArray(message)) {
         const botResponses = message.map((response, index) => ({
