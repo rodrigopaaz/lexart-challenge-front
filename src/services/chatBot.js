@@ -1,5 +1,5 @@
-const { login, register } = require('../services/request')
-const { default: csvCreator } = require('./csvCreator')
+const { login, register } = require('./request')
+const { default: csvCreator } = require('../utils/csvCreator')
 
 const stages = {
   isRegistered: true,
@@ -103,7 +103,7 @@ export const chatBot = async (allMessages, server) => {
   case (!stages.isRegistered && !stages.password) || !stages.password:
     return await validatePassword(lastMessage.text)
   case !stages.loanOffer:
-    return offersALoan(lastMessage.text)
+    return offersALoan(lastMessage.text.toLowerCase())
   case !stages.endConversation:
     if (lastMessage.text.toLowerCase().includes('goodbye')) {
       stages.endConversation = true
