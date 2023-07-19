@@ -28,8 +28,9 @@ export default function History () {
           <div>
             <h4>History</h4>
             {cards.map((c) => {
+              const host = process.env.REACT_APP_API_URL || 'http://localhost:3001'
               return (<div className='history-card' key={c.id}>
-                {<a href={`http://localhost:3001/message/${c.id}`} target='_blank' rel="noreferrer">{c.fileName}
+                {<a href={`${host}/message/${c.id}`} target='_blank' rel="noreferrer">{c.fileName}
                 </a>}
               </div>)
             })}
