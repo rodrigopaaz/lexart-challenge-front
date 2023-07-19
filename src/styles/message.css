@@ -12,6 +12,7 @@ margin-bottom: 4px;
     flex-wrap: wrap;
     align-items: center;
     text-align: left;
+    color: white;
     justify-content: flex-start;   
     margin-bottom: 5px;
     padding: 7px;
@@ -19,7 +20,7 @@ margin-bottom: 4px;
     border-top-left-radius: 10px;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
-    background-color: rgb(187, 187, 187);
+    background-color: rgb(73, 117, 79);
     }
 
 .message-container-right div{
@@ -34,7 +35,9 @@ border-top-left-radius: 10px;
 border-bottom-left-radius: 10px;
 border-top-right-radius: 10px;
 text-align: right;
-background-color: rgb(214, 213, 213);
+color: white;
+font-weight: 700;
+background-color: rgb(32, 212, 101);
 }
 
 .message-container-right{
