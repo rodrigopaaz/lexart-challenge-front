@@ -1,20 +1,20 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true
+    es2021: true,
+    'jest/globals': true // Adicione esta linha
   },
   extends: [
     'standard',
-    'plugin:react/recommended'
+    'plugin:react/recommended',
+    'plugin:jest/recommended' // Adicione esta linha
   ],
   overrides: [
     {
       env: {
         node: true
       },
-      files: [
-        '.eslintrc.{js,cjs}'
-      ],
+      files: ['.eslintrc.{js,cjs}'],
       parserOptions: {
         sourceType: 'script'
       }
@@ -25,7 +25,8 @@ module.exports = {
     sourceType: 'module'
   },
   plugins: [
-    'react'
+    'react',
+    'jest'
   ],
   rules: {
     'react/react-in-jsx-scope': 'off',
