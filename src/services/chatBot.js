@@ -90,7 +90,7 @@ export const chatBot = async (allMessages, server) => {
   host = server
   const lastMessage = allMessages[allMessages.length - 1]
   switch (true) {
-  case lastMessage.text.toLowerCase() === 'clear':
+  case lastMessage.text.toLowerCase().includes('clear'):
     stages.isRegistered = true
     stages.intro = false
     stages.name = false
@@ -99,7 +99,7 @@ export const chatBot = async (allMessages, server) => {
     stages.loanOffer = false
     stages.endConversation = false
 
-    return 'Are you Sure, type clear again?'
+    return null
   case typeof lastMessage.text === 'string' && lastMessage.text.toLowerCase().includes('create user'):
     stages.isRegistered = false
     stages.email = false
