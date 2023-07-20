@@ -33,7 +33,7 @@ const intro = (message) => {
       }
     }
   }
-  return 'Sorry, I didn\'t understand. Please let me know what you want or what would be good for you.'
+  return 'Sorry, I didn\'t understand. Please let me know what you want or what would be good for you. To start a new conversation type "clear"'
 }
 
 const validateName = async (name) => {
@@ -68,7 +68,8 @@ const validatePassword = async (password) => {
     }
     return `Glad to see you here ${stages.name}, How can I assist you?`
   } catch (error) {
-    return 'An error happened during your login, are you registered? if you are not registered type "create user"'
+    console.log(error)
+    return 'An error happened during your login, are you registered? if you are not registered type "create user", To start a new conversation type "clear"'
   }
 }
 
@@ -82,13 +83,23 @@ const offersALoan = (message) => {
       { message: 'Click a message above for personal assistance' }
     ]
   }
-  return 'Sorry, I didn\'t understand what you want.'
+  return 'Sorry, I didn\'t understand what you want. If you want to start a new conversation type clear'
 }
 
 export const chatBot = async (allMessages, server) => {
   host = server
   const lastMessage = allMessages[allMessages.length - 1]
   switch (true) {
+  case lastMessage.text.toLowerCase() === 'clear':
+    stages.isRegistered = true
+    stages.intro = false
+    stages.name = false
+    stages.email = false
+    stages.password = false
+    stages.loanOffer = false
+    stages.endConversation = false
+
+    return null
   case typeof lastMessage.text === 'string' && lastMessage.text.toLowerCase().includes('create user'):
     stages.isRegistered = false
     stages.email = false
@@ -109,7 +120,7 @@ export const chatBot = async (allMessages, server) => {
       stages.endConversation = true
       return await csvCreator(allMessages, host)
     }
-    return "Sorry, I didn't understand. Please let me know what you want or what would be good for you."
+    return "Sorry, I didn't understand. Please let me know what you want or what would be good for you. To start a new conversation type 'clear', to end this conversation type 'goodbye'"
   default:
     return await csvCreator(allMessages, host)
   }
