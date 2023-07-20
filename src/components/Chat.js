@@ -11,9 +11,9 @@ export default function Chat () {
   const { messages, setMessages } = useContext(AppContext)
 
   const handleMessage = async () => {
-    if (text === 'clear') {
+    if (text.toLocaleLowerCase() === 'clear') {
       setMessages([])
-      chatBot([{ text }])
+      chatBot([{ text: text.toLowerCase() }])
       setText('')
       return null
     }
