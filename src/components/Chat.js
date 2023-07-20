@@ -11,6 +11,12 @@ export default function Chat () {
   const { messages, setMessages } = useContext(AppContext)
 
   const handleMessage = async () => {
+    if (text === 'clear') {
+      setMessages([])
+      chatBot([{ text }])
+      setText('')
+      return null
+    }
     const newMessage = {
       id: messages.length + 1,
       user: 'user',
