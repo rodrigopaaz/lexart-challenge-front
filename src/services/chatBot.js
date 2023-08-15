@@ -68,7 +68,6 @@ const validatePassword = async (password) => {
     }
     return `Glad to see you here ${stages.name}, How can I assist you?`
   } catch (error) {
-    console.log(error)
     return 'An error happened during your login, are you registered? if you are not registered type "create user", To start a new conversation type "clear"'
   }
 }

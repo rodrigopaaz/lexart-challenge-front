@@ -37,16 +37,4 @@ const register = async (name, email, password, setHost) => {
   return data
 }
 
-const remove = async (id, setHost) => {
-  const host = setHost || 'http://localhost:3001'
-  const data = await axios({
-    method: 'delete',
-    url: `${host}/products/${id}`,
-    data: {
-      id
-    }
-  })
-  return data
-}
-
-export { getFiles, login, register, remove }
+export { getFiles, login, register }

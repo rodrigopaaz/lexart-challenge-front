@@ -4,10 +4,10 @@ import { getFiles } from '../services/request'
 const csvCreator = async (jsonData, host) => {
   const { id: userId, name } = JSON.parse(localStorage.getItem('user'))
   const { data } = await getFiles(userId, host)
-  console.log(data)
+  const messages = jsonData.map(({ id, user, text }) => [id, user, text])
   const csvData = [
     ['ID', 'User', 'Text'],
-    ...jsonData.map(({ id, user, text }) => [id, user, text])
+    ...messages
   ]
 
   const csvContent = csvData.map(row => row.join(',')).join('\n')
